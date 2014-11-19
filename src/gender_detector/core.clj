@@ -2,6 +2,17 @@
   (:require [clojure.string :as string]
             [clojure.java.io :refer [reader resource]]))
 
+(defn gender-desc [s]
+  (condp = s
+    "M" :male
+    "?M" :mostly-male
+    "1M" :mostly-male
+    "F" :female
+    "?F" :mostly-female
+    "1F" :mostly-female
+    "?" :unknown
+    (throw (Exception. (str "Not sure what to do with a gender of " s)))))
+
 (defn highest-score [scores]
   (-> scores
       sort
@@ -21,17 +32,6 @@
     (let [lines (line-seq rdr)]
       (remove (partial re-find #"\A[#=]") (doall (line-seq rdr))))))
 
-(defn gender-desc [s]
-  (condp = s
-    "M" :male
-    "?M" :mostly-male
-    "1M" :mostly-male
-    "F" :female
-    "?F" :mostly-female
-    "1F" :mostly-female
-    "?" :unknown
-    (throw (Exception. (str "Not sure what to do with a gender of " s)))))
-
 (defonce names
   (->> (map parse-line (lines))
        (group-by first)
@@ -45,8 +45,3 @@
 
 (defn guess-gender [name]
   (get names (string/lower-case name)))
-
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
