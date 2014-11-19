@@ -21,6 +21,17 @@
     (let [lines (line-seq rdr)]
       (remove (partial re-find #"\A[#=]") (doall (line-seq rdr))))))
 
+(defn gender-desc [s]
+  (condp = s
+    "M" :male
+    "?M" :mostly-male
+    "1M" :mostly-male
+    "F" :female
+    "?F" :mostly-female
+    "1F" :mostly-female
+    "?" :unknown
+    (throw (Exception. (str "Not sure what to do with a gender of " s)))))
+
 (defonce names
   (->> (map parse-line (lines))
        (group-by first)
@@ -28,10 +39,11 @@
               [(string/lower-case name) (-> (sort-by second values)
                                             reverse
                                             first
-                                            (nth 1))]))
+                                            (nth 1)
+                                            gender-desc)]))
        (into {})))
 
-(defn get-gender [name]
+(defn guess-gender [name]
   (get names (string/lower-case name)))
 
 (defn foo
