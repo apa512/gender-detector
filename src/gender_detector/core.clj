@@ -21,10 +21,10 @@
       (Integer/parseInt 16)))
 
 (defn parse-line [s]
-  (let [[gender-and-name] (remove empty? (string/split s #"\s{3}"))
-        [gender & name] (string/split gender-and-name #"\s+")
-        scores (remove #{\$ \space} (drop 30 s))
-        name (string/join " " name)]
+  (let [gender-and-name (first (remove empty? (string/split s #"\s{3}")))
+        [gender & name-parts] (string/split gender-and-name #"\s+")
+        name (string/join " " name-parts)
+        scores (remove #{\$ \space} (drop 30 s))]
     [name gender (highest-score scores)]))
 
 (defn lines []
