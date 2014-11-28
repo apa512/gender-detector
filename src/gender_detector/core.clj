@@ -13,12 +13,15 @@
     "?" :unknown
     (throw (Exception. (str "Not sure what to do with a gender of " s)))))
 
+(defn hex->int [s]
+  (Integer/parseInt s 16))
+
 (defn highest-score [scores]
   (-> scores
       sort
       last
       str
-      (Integer/parseInt 16)))
+      hex->int))
 
 (defn parse-line [s]
   (let [gender-and-name (first (remove empty? (string/split s #"\s{3}")))
