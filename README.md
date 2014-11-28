@@ -1,6 +1,6 @@
 # gender-detector
 
-A Clojure library designed to guess gender from first name
+Guess gender from first name
 
 ## Usage
 
