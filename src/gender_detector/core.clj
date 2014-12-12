@@ -32,8 +32,7 @@
 
 (defn lines []
   (with-open [rdr (reader (resource "nam_dict.txt") :encoding "ISO-8859-1")]
-    (let [lines (line-seq rdr)]
-      (remove (partial re-find #"\A[#=]") (doall (line-seq rdr))))))
+    (remove (partial re-find #"\A[#=]") (doall (line-seq rdr)))))
 
 (defonce names
   (->> (map parse-line (lines))
