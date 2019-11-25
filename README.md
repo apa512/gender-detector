@@ -1,6 +1,6 @@
 # gender-detector
 
-Guess gender from first name
+Guess gender from first name.
 
 ## Usage
 
