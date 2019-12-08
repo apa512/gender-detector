@@ -13,9 +13,14 @@ Guess gender from first name.
 (guess-gender "aaf")
 => :mostly-female
 
+(guess-gender "Emma")
+=> :female
+
 (guess-gender "Pauley")
 => :unknown
 ```
+
+Valid values are `#{:male :female :mostly-male :mostly-female :unknown}`
 
 ## License
 
