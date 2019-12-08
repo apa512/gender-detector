@@ -5,7 +5,7 @@ Guess gender from first name.
 ## Usage
 
 ```clojure
-(require '[gender-detector :refer [guess-gender]])
+(require '[gender-detector.core :refer [guess-gender]])
 
 (guess-gender "Örjan")
 => :male
